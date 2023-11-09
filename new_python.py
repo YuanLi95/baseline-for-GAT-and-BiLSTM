@@ -118,7 +118,7 @@ def train(args):
             train_all_loss += loss
             optimizer.zero_grad()
             loss.backward()
-        optimizer.step()
+            optimizer.step()
         print('this epoch train loss :{0}'.format(train_all_loss))
         # scheduler.step()
         eval(model,valset, args)
