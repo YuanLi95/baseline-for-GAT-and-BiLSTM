@@ -31,14 +31,18 @@ def get_train_data(file_path,edge_pth):
             date_df_dict[i] = number_date
             number_date += 1
 
-    new_data = [len(geohasd_df_dict) * [0]] * len(date_df_dict)
+    new_data = np.zeros((len(date_df_dict),len(geohasd_df_dict),38))#[len(geohasd_df_dict) * [[0]]] * len(date_df_dict)
     for index, row in df.iterrows():
         # print(index)
         hash_index, date_index = geohasd_df_dict[row["geohash_id"]], date_df_dict[row["date_id"]]
+        # print(hash_index)
+        # print(date_index)
+        # exit()
         #将时间index加到里面
+        # print(len(np.array([date_index]+list(row.iloc[2:]))))
 
-        new_data[date_index][hash_index] = [date_index]+list(row.iloc[2:])
-    new_data = np.array(new_data)
+        new_data[date_index][hash_index] = np.array([date_index]+list(row.iloc[2:]))
+    # new_data = np.array(new_data)
     # x_train,y_train = new_data[:, :-2], new_data[:, -2:]
     # print(len(geohasd_df_dict))
     # exit()
